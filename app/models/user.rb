@@ -25,4 +25,13 @@ class User < ApplicationRecord
   def followed_by?(user)
     followeds.exists?(follower_id: user.id)
   end
+
+  def self.looks(searches, words)
+    if searches == "perfect_match"
+      @user = User.where("name LIKE?", "#{words}")
+    else
+      @user = User.where("name LIKE?", "%#{words}%")
+    end
+  end
+
 end
